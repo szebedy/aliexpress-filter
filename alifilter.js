@@ -7,16 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
 			chrome.tabs.executeScript(tabs[0].id,{code: `
 				var interval = setInterval(function(){
 					var minrating = ` + minrating + `
-					var ratings = document.getElementsByClassName('rating-value');
+					var ratings = document.getElementsByClassName('_1hEhM');
 					var badratings = Array.prototype.filter.call(ratings, function(rating){
 						return rating.innerHTML < minrating;
 					});
 					for(var i = 0; i < badratings.length; i++){
+						var j = 10;
 						var el = badratings[i].parentElement;
-						while(el.tagName != 'LI'){
+						while(el.className != '_1OUGS'){
 							el = el.parentElement;
+							j--;
+							if(j == 0) break;
 						}
-						el.style.display = 'none'; // depending on what you're doing
+						if(j != 0) el.style.display = 'none'; // depending on what you're doing
 					}
 				}, 300);
 			`});
