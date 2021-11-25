@@ -7,18 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
 			chrome.tabs.executeScript(tabs[0].id,{code: `
 				var interval = setInterval(function(){
 					var minrating = ` + minrating + `
-					var ratings = document.getElementsByClassName('eXPaM');
+					var ratings = document.getElementsByTagName('span');
 					var badratings = Array.prototype.filter.call(ratings, function(rating){
-						return rating.innerHTML < minrating;
+						return /^([1-4]\.[0-9])$/.test(rating.innerHTML) && rating.innerHTML < minrating;
 					});
 					for(var i = 0; i < badratings.length; i++){
 						var j = 2;
 						var el = badratings[i].parentElement;
-						//while(el.className != '_2f4Ho _3t7zg'){
 						while(j-- > 0){
 							el = el.parentElement;
 						}
-						//if(j != 0) el.style.display = 'none'; // depending on what you're doing
 						el.style.display = 'none';
 					}
 				}, 300);
