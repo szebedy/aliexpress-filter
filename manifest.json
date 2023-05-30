@@ -1,15 +1,15 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Aliexpress Rating Filter",
   "description": "This google chrome extension will filter and hide articles with bad ratings",
-  "version": "1.7",
+  "version": "2.0",
 
-  "browser_action": {
+  "action": {
    "default_icon": "icon.png",
    "default_popup": "popup.html"
   },
   "permissions": [
-   "activeTab"
+   "activeTab", "scripting"
    ]
 }
