@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	var filterButton = document.getElementById('filter');
 	filterButton.addEventListener('click', function() {
-		var minrating = document.getElementById('numberInput').value;
+		var minrating = document.getElementById('rangeInput').value;
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 			chrome.scripting.executeScript({
 				target: {tabId: tabs[0].id},
@@ -22,19 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function filter(minrating) {
 	var interval = setInterval(function(){
-	var ratings = document.getElementsByTagName('span');
-	var badratings = Array.prototype.filter.call(ratings, function(rating){
-		return /^([1-4]\.[0-9])$/.test(rating.innerHTML) && rating.innerHTML < minrating;
-	});
-	for(var i = 0; i < badratings.length; i++){
-		var j = 2;
-		var el = badratings[i].parentElement;
-		while(j-- > 0){
-			el = el.parentElement;
+		var ratings = document.getElementsByTagName('div');
+		var badratings = Array.prototype.filter.call(ratings, function(rating){
+			return rating.className.includes('multi--progress') && (parseFloat(rating.style.width) < minrating);
+		});
+		for(var i = 0; i < badratings.length; i++){
+			var j = 7;
+			var el = badratings[i].parentElement;
+			while(j-- > 0){
+				el = el.parentElement;
+			}
+			el.style.display = 'none';
 		}
-		el.style.display = 'none';
-	}
-}, 300);
+	}, 300);
 }
 
 function updateNumberInput(val) {

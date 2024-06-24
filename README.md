@@ -1,5 +1,5 @@
 # About
-This google chrome extension will filter and hide articles with bad ratings
+This google chrome extension filters and hides articles with bad ratings
 # Installation
 1. Download or clone the contents of this repository
 2. Open a new google chrome tab and enter `chrome://extensions/`
